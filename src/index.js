@@ -87,6 +87,13 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
+    let draw = true;
+    for (let i = 0; i < current.squares.length; i++) { // draw処理
+      if (!current.squares[i]) {
+        draw = false;
+        break;
+      }
+    }
 
     const moves = history.map((step, move) => {
       const desc = move ?
@@ -103,7 +110,11 @@ class Game extends React.Component {
     if (winner) {
       status = "Winner: " + winner;
     } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      if (draw) {
+        status = "Draw";
+      }else {
+        status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      }
     }
 
     return (
@@ -129,13 +140,13 @@ ReactDOM.render(<Game />, document.getElementById("root"));
 
 function calculateWinner(squares) {
   const lines = [
-    [0, 1, 2],
+    [0, 1, 2], // 横ラインの揃った例
     [3, 4, 5],
     [6, 7, 8],
-    [0, 3, 6],
+    [0, 3, 6], // 縦ラインの揃った例
     [1, 4, 7],
     [2, 5, 8],
-    [0, 4, 8],
+    [0, 4, 8], // 斜めラインの揃った例
     [2, 4, 6]
   ];
   for (let i = 0; i < lines.length; i++) {
