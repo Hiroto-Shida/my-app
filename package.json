@@ -1,4 +1,5 @@
 {
+  "homepage": "https://Hiroto-Shida.github.io/my-app/",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -14,6 +15,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "rm": "rm -rf docs",
+    "mv": "mv build docs",
+    "git": "git add . && git commit -m 'first-commit' && git push origin master",
+    "deploy": "npm run rm && npm run build && npm run mv && npm run git",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
